@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to tasks_path, notice: 'Регистрация прошла успешно.'
+      redirect_to tasks_path, notice: "Регистрация прошла успешно."
     else
       render :new
     end
