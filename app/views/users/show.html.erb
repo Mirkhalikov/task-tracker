@@ -1,0 +1,14 @@
+<h1>Профиль пользователя: <%= @user.username %></h1>
+
+<% if @user.avatar.attached? %>
+  <div>
+    <strong>Аватар:</strong>
+    <%= image_tag @user.avatar %>
+  </div>
+<% end %>
+
+<p>
+  <%= link_to 'Редактировать', edit_user_path(@user) %>
+</p>
+
+<%= link_to 'Назад', users_path %>
