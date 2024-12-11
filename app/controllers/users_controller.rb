@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    authenticate_user! # Проверка на авторизацию
     @user = User.find(params[:id])
   end
 
@@ -14,17 +15,20 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to root_path, notice: "Регистрация прошла успешно."
+      session[:user_id] = @user.id
+      redirect_to tasks_path, notice: "Регистрация прошла успешно."
     else
       render :new
     end
   end
 
   def edit
+    authenticate_user! # Проверка на авторизацию
     @user = User.find(params[:id])
   end
 
   def update
+    authenticate_user! # Проверка на авторизацию
     @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to users_path, notice: "Профиль обновлён."

@@ -1,45 +1,44 @@
 class TasksController < ApplicationController
+  before_action :authenticate_user!
+
   def index
-    @tasks = Task.all
+    @tasks = @current_user.tasks
   end
 
   def show
-    @task = Task.find(params[:id])
+    @task = @current_user.tasks.find(params[:id])
   end
 
   def new
-    @task = Task.new
-    @categories = Category.all
+    @task = @current_user.tasks.build
   end
 
   def create
-    @task = Task.new(task_params)
-    @task.user = current_user
+    @task = @current_user.tasks.build(task_params)
     if @task.save
-      redirect_to tasks_path, notice: "Задача создана."
+      redirect_to tasks_path, notice: "Задача была создана."
     else
       render :new
     end
   end
 
   def edit
-    @task = Task.find(params[:id])
-    @categories = Category.all
+    @task = @current_user.tasks.find(params[:id])
   end
 
   def update
-    @task = Task.find(params[:id])
+    @task = @current_user.tasks.find(params[:id])
     if @task.update(task_params)
-      redirect_to task_path(@task), notice: "Задача обновлена."
+      redirect_to tasks_path, notice: "Задача была обновлена."
     else
       render :edit
     end
   end
 
   def destroy
-    @task = Task.find(params[:id])
+    @task = @current_user.tasks.find(params[:id])
     @task.destroy
-    redirect_to tasks_path, notice: "Задача удалена."
+    redirect_to tasks_path, notice: "Задача была удалена."
   end
 
   private
