@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to root_path, notice: 'Регистрация прошла успешно.'
+      redirect_to root_path, notice: "Регистрация прошла успешно."
     else
       render :new
     end
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to users_path, notice: 'Профиль обновлён.'
+      redirect_to users_path, notice: "Профиль обновлён."
     else
       render :edit
     end
