@@ -1,40 +1,42 @@
-<h1>Редактировать задачу</h1>
+<div class="container">
+  <header>
+    <h1>Редактировать задачу</h1>
+  </header>
 
-<%= form_with(model: @task, local: true) do |form| %>
-  <% if @task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@task.errors.count, "ошибка") %> предотвращает сохранение этой задачи:</h2>
-      <ul>
-        <% @task.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+  <%= form_with(model: @task, local: true) do |form| %>
+    <% if @task.errors.any? %>
+      <div class="error-message">
+        <h2><%= pluralize(@task.errors.count, "ошибка") %> предотвращает сохранение:</h2>
+        <ul>
+          <% @task.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-field">
+      <%= form.label :title %>
+      <%= form.text_field :title %>
     </div>
+
+    <div class="form-field">
+      <%= form.label :description %>
+      <%= form.text_area :description %>
+    </div>
+
+    <div class="form-field">
+      <%= form.label :status %>
+      <%= form.select :status, ['в процессе', 'завершено'] %>
+    </div>
+
+    <div class="form-field">
+      <%= form.label :categories %>
+      <%= form.collection_check_boxes :category_ids, Category.all, :id, :name %>
+    </div>
+
+    <%= form.submit "Обновить задачу", class: 'button' %>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.select :status, ['в процессе', 'завершено'] %>
-  </div>
-
-  <div class="field">
-    <%= form.label :categories %>
-    <%= form.collection_check_boxes :category_ids, Category.all, :id, :name %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit "Обновить задачу" %>
-  </div>
-<% end %>
-
-<%= link_to 'Назад', task_path(@task) %>
+  <%= link_to 'Назад', task_path(@task), class: 'button' %>
+</div>
