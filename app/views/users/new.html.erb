@@ -1,6 +1,6 @@
-<h1>Регистрация</h1>
+<h1 class="page-title">Регистрация</h1>
 
-<%= form_with(model: @user, local: true) do |form| %>
+<%= form_with(model: @user, local: true, html: { class: "registration-form" }) do |form| %>
   <% if @user.errors.any? %>
     <div class="error-message">
       <ul>
@@ -12,25 +12,25 @@
   <% end %>
 
   <div class="form-field">
-    <%= form.label :username %>
-    <%= form.text_field :username %>
+    <%= form.label :username, class: "field-label" %>
+    <%= form.text_field :username, class: "field-input" %>
   </div>
 
   <div class="form-field">
-    <%= form.label :password %>
-    <%= form.password_field :password %>
+    <%= form.label :password, class: "field-label" %>
+    <%= form.password_field :password, class: "field-input" %>
   </div>
 
   <div class="form-field">
-    <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation %>
+    <%= form.label :password_confirmation, class: "field-label" %>
+    <%= form.password_field :password_confirmation, class: "field-input" %>
   </div>
 
   <div class="actions">
-    <%= form.submit "Зарегистрироваться", class: 'button' %>
+    <%= form.submit "Зарегистрироваться", class: 'btn btn-register' %>
   </div>
 <% end %>
 
 <p>
-  <%= link_to 'Вход', login_path %>
+  <%= link_to 'Вход', login_path, class: "btn btn-login" %>
 </p>

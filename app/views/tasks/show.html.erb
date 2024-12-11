@@ -1,17 +1,23 @@
-<h1><%= @task.title %></h1>
+<div class="container">
+  <header>
+    <h1 class="page-title"><%= @task.title %></h1>
+  </header>
 
-<p>
-  <strong>Описание:</strong>
-  <%= @task.description %>
-</p>
-<p>
-  <strong>Статус:</strong>
-  <%= @task.status %>
-</p>
-<p>
-  <strong>Категории:</strong>
-  <%= @task.categories.pluck(:name).join(', ') %>
-</p>
+  <p>
+    <strong>Описание:</strong>
+    <%= @task.description %>
+  </p>
+  <p>
+    <strong>Статус:</strong>
+    <%= @task.status %>
+  </p>
+  <p>
+    <strong>Категории:</strong>
+    <%= @task.categories.pluck(:name).join(', ') %>
+  </p>
 
-<%= link_to 'Редактировать задачу', edit_task_path(@task) %> |
-<%= link_to 'Назад', tasks_path %>
+  <div class="actions">
+    <%= link_to 'Редактировать задачу', edit_task_path(@task), class: 'btn btn-edit' %> |
+    <%= link_to 'Назад', tasks_path, class: 'btn btn-back' %>
+  </div>
+</div>

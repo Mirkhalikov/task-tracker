@@ -1,11 +1,11 @@
 <div class="container">
   <header>
-    <h1>Список задач</h1>
+    <h1 class="page-title">Список задач</h1>
   </header>
 
-  <%= link_to 'Создать новую задачу', new_task_path, class: 'button' %>
+  <%= link_to 'Создать новую задачу', new_task_path, class: 'btn btn-create' %>
 
-  <table>
+  <table class="task-table">
     <thead>
     <tr>
       <th>Название</th>
@@ -16,10 +16,10 @@
     <tbody>
     <% @tasks.each do |task| %>
       <tr>
-        <td><%= link_to task.title, task_path(task) %></td>
+        <td><%= link_to task.title, task_path(task), class: "task-title" %></td>
         <td><%= task.status %></td>
-        <td><%= link_to 'Редактировать', edit_task_path(task), class: 'button' %></td>
-        <td><%= link_to 'Удалить', task_path(task), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'button' %></td>
+        <td><%= link_to 'Редактировать', edit_task_path(task), class: 'btn btn-edit' %></td>
+        <td><%= link_to 'Удалить', task_path(task), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-delete' %></td>
       </tr>
     <% end %>
     </tbody>

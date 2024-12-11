@@ -1,6 +1,6 @@
-<h1>Список пользователей</h1>
+<h1 class="page-title">Список пользователей</h1>
 
-<table>
+<table class="user-table">
   <thead>
   <tr>
     <th>Имя пользователя</th>
@@ -11,18 +11,21 @@
   <tbody>
   <% @users.each do |user| %>
     <tr>
-      <td><%= link_to user.username, user_path(user) %></td>
+      <td><%= link_to user.username, user_path(user), class: "username-link" %></td>
       <td>
         <% if user.avatar.attached? %>
-          <%= image_tag user.avatar %>
+          <%= image_tag user.avatar, class: "user-avatar" %>
+        <% else %>
+          <em>No Avatar</em>
         <% end %>
       </td>
       <td>
-        <%= link_to 'Редактировать', edit_user_path(user) %>
+        <%= link_to 'Редактировать', edit_user_path(user), class: "action-link" %>
+        <%= link_to 'Удалить', user_path(user), method: :delete, data: { confirm: 'Вы уверены?' }, class: "action-link" %>
       </td>
     </tr>
   <% end %>
   </tbody>
 </table>
 
-<%= link_to 'Создать нового пользователя', new_user_path %>
+<%= link_to 'Создать нового пользователя', new_user_path, class: "btn btn-create" %>

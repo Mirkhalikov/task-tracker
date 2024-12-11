@@ -1,8 +1,8 @@
-<h1>Редактировать пользователя</h1>
+<h1 class="page-title">Редактировать пользователя</h1>
 
-<%= form_with(model: @user, local: true) do |form| %>
+<%= form_with(model: @user, local: true, html: { class: "user-form" }) do |form| %>
   <% if @user.errors.any? %>
-    <div id="error_explanation">
+    <div class="error-explanation">
       <h2><%= pluralize(@user.errors.count, "ошибка") %> предотвращает сохранение:</h2>
       <ul>
         <% @user.errors.full_messages.each do |message| %>
@@ -13,29 +13,29 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :username %>
-    <%= form.text_field :username %>
+    <%= form.label :username, class: "field-label" %>
+    <%= form.text_field :username, class: "field-input" %>
   </div>
 
   <div class="field">
-    <%= form.label :password_hash, "Пароль" %>
-    <%= form.password_field :password_hash %>
+    <%= form.label :password_hash, "Пароль", class: "field-label" %>
+    <%= form.password_field :password_hash, class: "field-input" %>
   </div>
 
   <div class="field">
-    <%= form.label :avatar %>
-    <%= form.file_field :avatar %>
+    <%= form.label :avatar, class: "field-label" %>
+    <%= form.file_field :avatar, class: "field-input" %>
     <% if @user.avatar.attached? %>
-      <div>
+      <div class="current-avatar">
         <strong>Текущий аватар:</strong>
-        <%= image_tag @user.avatar %>
+        <%= image_tag @user.avatar, class: "user-avatar" %>
       </div>
     <% end %>
   </div>
 
   <div class="actions">
-    <%= form.submit "Обновить пользователя" %>
+    <%= form.submit "Обновить пользователя", class: "btn btn-update" %>
   </div>
 <% end %>
 
-<%= link_to 'Назад', users_path %>
+<%= link_to 'Назад', users_path, class: "btn btn-back" %>

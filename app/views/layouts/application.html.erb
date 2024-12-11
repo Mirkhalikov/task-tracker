@@ -1,28 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= content_for(:title) || "Task Tracker" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title><%= content_for(:title) || "Task Tracker" %></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= yield :head %>
+  <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon.png">
 
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
+  <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+<body>
+<header class="app-header">
+  <div class="header-container">
+    <h1 class="app-title"><a href="<%= root_path %>">Task Tracker</a></h1>
+    <nav class="header-nav">
+      <ul>
+        <li><a href="<%= tasks_path %>">Задачи</a></li>
+        <% if current_user %>
+          <li><a href="<%= user_path(current_user) %>">
+            <img src="<%= current_user.avatar.attached? ? url_for(current_user.avatar) : 'default_avatar.png' %>" class="user-avatar">
+            <%= current_user.username %>
+          </a></li>
+          <li><a href="<%= users_path %>">Все пользователи</a></li>
+          <li><%= link_to 'Выход', logout_path, method: :delete, data: { confirm: 'Вы уверены, что хотите выйти?' } %></li>
+        <% else %>
+          <li><a href="<%= login_path %>">Войти</a></li>
+          <li><a href="<%= signup_path %>">Регистрация</a></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-  <body>
-    <%= yield %>
-  </body>
+<%= yield %>
+</body>
 </html>

@@ -1,9 +1,9 @@
 <div class="container">
   <header>
-    <h1>Редактировать задачу</h1>
+    <h1 class="page-title">Редактировать задачу</h1>
   </header>
 
-  <%= form_with(model: @task, local: true) do |form| %>
+  <%= form_with(model: @task, local: true, html: { class: "task-form" }) do |form| %>
     <% if @task.errors.any? %>
       <div class="error-message">
         <h2><%= pluralize(@task.errors.count, "ошибка") %> предотвращает сохранение:</h2>
@@ -16,27 +16,34 @@
     <% end %>
 
     <div class="form-field">
-      <%= form.label :title %>
-      <%= form.text_field :title %>
+      <%= form.label :title, class: "field-label" %>
+      <%= form.text_field :title, class: "field-input" %>
     </div>
 
     <div class="form-field">
-      <%= form.label :description %>
-      <%= form.text_area :description %>
+      <%= form.label :description, class: "field-label" %>
+      <%= form.text_area :description, class: "field-input" %>
     </div>
 
     <div class="form-field">
-      <%= form.label :status %>
-      <%= form.select :status, ['в процессе', 'завершено'] %>
+      <%= form.label :status, class: "field-label" %>
+      <%= form.select :status, ['в процессе', 'завершено'], { class: "field-input" } %>
     </div>
 
     <div class="form-field">
-      <%= form.label :categories %>
-      <%= form.collection_check_boxes :category_ids, Category.all, :id, :name %>
+      <%= form.label :categories, class: "field-label" %>
+      <%= form.collection_check_boxes :category_ids, Category.all, :id, :name do |b| %>
+        <div class="category-check">
+          <%= b.check_box %>
+          <%= b.label %>
+        </div>
+      <% end %>
     </div>
 
-    <%= form.submit "Обновить задачу", class: 'button' %>
+    <div class="actions">
+      <%= form.submit "Обновить задачу", class: 'btn btn-update' %>
+    </div>
   <% end %>
 
-  <%= link_to 'Назад', task_path(@task), class: 'button' %>
+  <%= link_to 'Назад', task_path(@task), class: 'btn btn-back' %>
 </div>

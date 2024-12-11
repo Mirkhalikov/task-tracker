@@ -1,14 +1,17 @@
-<h1>Профиль пользователя: <%= @user.username %></h1>
+<h1 class="page-title">Профиль пользователя: <%= @user.username %></h1>
 
-<% if @user.avatar.attached? %>
-  <div>
-    <strong>Аватар:</strong>
-    <%= image_tag @user.avatar %>
+<div class="profile">
+  <% if @user.avatar.attached? %>
+    <div class="avatar-section">
+      <strong>Аватар:</strong>
+      <%= image_tag @user.avatar, class: "user-avatar" %>
+    </div>
+  <% end %>
+
+  <div class="profile-actions">
+    <p>
+      <%= link_to 'Редактировать', edit_user_path(@user), class: "btn btn-edit" %>
+    </p>
+    <%= link_to 'Назад', users_path, class: "btn btn-back" %>
   </div>
-<% end %>
-
-<p>
-  <%= link_to 'Редактировать', edit_user_path(@user) %>
-</p>
-
-<%= link_to 'Назад', users_path %>
+</div>
