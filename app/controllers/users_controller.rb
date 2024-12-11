@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to tasks_path, notice: "Регистрация прошла успешно."
+      redirect_to tasks_path, notice: 'Регистрация прошла успешно.'
     else
       render :new
     end
@@ -40,6 +40,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :password_hash, :avatar)
+    params.require(:user).permit(:username, :password, :password_confirmation, :avatar)
   end
 end
