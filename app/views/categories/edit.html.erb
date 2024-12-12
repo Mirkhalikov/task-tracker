@@ -22,4 +22,5 @@
   </div>
 <% end %>
 
-<%= link_to 'Назад', categories_path %>
+<%= link_to "Назад", request.referer && URI(request.referer).path != request.fullpath ? URI(request.referer).path : categories_path, class: 'btn btn-back' %>
+

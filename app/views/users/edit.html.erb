@@ -36,6 +36,6 @@
   <div class="actions">
     <%= form.submit "Обновить пользователя", class: "btn btn-update" %>
 
-    <%= link_to 'Назад', users_path, class: "btn btn-back" %>
+    <%= link_to "Назад", request.referer && URI(request.referer).path != request.fullpath ? URI(request.referer).path : users_path, class: 'btn btn-back' %>
   </div>
 <% end %>

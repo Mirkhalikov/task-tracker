@@ -27,7 +27,7 @@
 
     <div class="form-field">
       <%= form.label :status, class: "field-label" %>
-      <%= form.select :status, ['в процессе', 'завершено'], { class: "field-input" } %>
+      <%= form.select :status, ['Бэклог', 'В фокусе', 'В процессе', 'QA', 'Завершено'], { class: "field-input" } %>
     </div>
 
     <div class="form-field">
@@ -45,5 +45,5 @@
     </div>
   <% end %>
 
-  <%= link_to 'Назад', tasks_path, class: 'btn btn-back' %>
+  <%= link_to "Назад", request.referer && URI(request.referer).path != request.fullpath ? URI(request.referer).path : tasks_path, class: 'btn btn-back' %>
 </div>
