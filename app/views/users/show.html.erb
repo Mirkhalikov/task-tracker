@@ -6,12 +6,19 @@
       <strong>Аватар:</strong>
       <%= image_tag @user.avatar, class: "user-avatar" %>
     </div>
+  <% else %>
+    <div class="avatar-section">
+      <strong>Аватар:</strong>
+      <img src="<%= image_path('default_avatar.png') %>" class="user-avatar" alt="Avatar пользователя">
+    </div>
   <% end %>
 
   <div class="profile-actions">
-    <p>
-      <%= link_to 'Редактировать', edit_user_path(@user), class: "btn btn-edit" %>
-    </p>
+    <% if @user.id == current_user.id %>
+      <p>
+        <%= link_to 'Редактировать', edit_user_path(@user), class: "btn btn-edit" %>
+      </p>
+    <% end %>
     <%= link_to 'Назад', users_path, class: "btn btn-back" %>
   </div>
 </div>

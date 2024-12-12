@@ -26,10 +26,12 @@
       <ul>
         <li><a href="<%= tasks_path %>">Задачи</a></li>
         <% if current_user %>
-          <li><a href="<%= user_path(current_user) %>">
-            <img src="<%= current_user.avatar.attached? ? url_for(current_user.avatar) : 'default_avatar.png' %>" class="user-avatar">
-            <%= current_user.username %>
-          </a></li>
+          <li>
+            <a href="<%= user_path(current_user) %>">
+              <img src="<%= current_user.avatar.attached? ? url_for(current_user.avatar) : image_path('default_avatar.png') %>" class="user-avatar" alt="Avatar пользователя">
+              <%= current_user.username %>
+            </a>
+          </li>
           <li><a href="<%= users_path %>">Все пользователи</a></li>
           <li><%= link_to 'Выход', logout_path, method: :delete, data: { confirm: 'Вы уверены, что хотите выйти?' } %></li>
         <% else %>
