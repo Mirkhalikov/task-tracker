@@ -10678,3 +10678,112 @@ FOREIGN KEY ("user_id")
   [1m[36mActiveRecord::InternalMetadata Update (0.1ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = 'test', "updated_at" = '2024-12-12 12:55:18.858570' WHERE "ar_internal_metadata"."key" = 'environment' /*application='TaskTracker'*/[0m
   [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TaskTracker'*/[0m
   [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '4d6a82b63602200ab09b0041607fd99cb021a532', '2024-12-12 12:55:18.859873', '2024-12-12 12:55:18.859875') RETURNING "key" /*application='TaskTracker'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TaskTracker'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TaskTracker'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TaskTracker'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TaskTracker'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TaskTracker'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TaskTracker'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_attachments" /*application='TaskTracker'*/[0m
+  [1m[35m (125.6ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "record_type" varchar NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" datetime(6) NOT NULL) /*application='TaskTracker'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id") /*application='TaskTracker'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id") /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_blobs" /*application='TaskTracker'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "key" varchar NOT NULL, "filename" varchar NOT NULL, "content_type" varchar, "metadata" text, "service_name" varchar NOT NULL, "byte_size" bigint NOT NULL, "checksum" varchar, "created_at" datetime(6) NOT NULL) /*application='TaskTracker'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_blobs_on_key" ON "active_storage_blobs" ("key") /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_variant_records" /*application='TaskTracker'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "blob_id" bigint NOT NULL, "variation_digest" varchar NOT NULL) /*application='TaskTracker'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest") /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "categories" /*application='TaskTracker'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "categories" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "categories_tasks" /*application='TaskTracker'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "categories_tasks" ("task_id" integer, "category_id" integer) /*application='TaskTracker'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_categories_tasks_on_category_id" ON "categories_tasks" ("category_id") /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_categories_tasks_on_task_id" ON "categories_tasks" ("task_id") /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "tasks" /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "description" text, "user_id" integer NOT NULL, "status" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_tasks_on_user_id" ON "tasks" ("user_id") /*application='TaskTracker'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar, "password_digest" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "avatar" varchar) /*application='TaskTracker'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='TaskTracker'*/[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[35mPRAGMA foreign_keys /*application='TaskTracker'*/[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys /*application='TaskTracker'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON /*application='TaskTracker'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aactive_storage_attachments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "record_type" varchar NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" datetime(6) NOT NULL) /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_aactive_storage_attachments_uniqueness" ON "aactive_storage_attachments" ("record_type", "record_id", "name", "blob_id") /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_aactive_storage_attachments_on_blob_id" ON "aactive_storage_attachments" ("blob_id") /*application='TaskTracker'*/[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "aactive_storage_attachments" ("id","name","record_type","record_id","blob_id","created_at")
+                     SELECT "id","name","record_type","record_id","blob_id","created_at" FROM "active_storage_attachments" /*application='TaskTracker'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "active_storage_attachments" /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "record_type" varchar NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+) /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id") /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id") /*application='TaskTracker'*/[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("id","name","record_type","record_id","blob_id","created_at")
+                     SELECT "id","name","record_type","record_id","blob_id","created_at" FROM "aactive_storage_attachments" /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aactive_storage_attachments" /*application='TaskTracker'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0 /*application='TaskTracker'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1 /*application='TaskTracker'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='TaskTracker'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='TaskTracker'*/[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[35mPRAGMA foreign_keys /*application='TaskTracker'*/[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys /*application='TaskTracker'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON /*application='TaskTracker'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aactive_storage_variant_records" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "blob_id" bigint NOT NULL, "variation_digest" varchar NOT NULL) /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_aactive_storage_variant_records_uniqueness" ON "aactive_storage_variant_records" ("blob_id", "variation_digest") /*application='TaskTracker'*/[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "aactive_storage_variant_records" ("id","blob_id","variation_digest")
+                     SELECT "id","blob_id","variation_digest" FROM "active_storage_variant_records" /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "active_storage_variant_records" /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "blob_id" bigint NOT NULL, "variation_digest" varchar NOT NULL, CONSTRAINT "fk_rails_993965df05"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+) /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest") /*application='TaskTracker'*/[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "active_storage_variant_records" ("id","blob_id","variation_digest")
+                     SELECT "id","blob_id","variation_digest" FROM "aactive_storage_variant_records" /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aactive_storage_variant_records" /*application='TaskTracker'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0 /*application='TaskTracker'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1 /*application='TaskTracker'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='TaskTracker'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='TaskTracker'*/[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[35mPRAGMA foreign_keys /*application='TaskTracker'*/[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys /*application='TaskTracker'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON /*application='TaskTracker'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atasks" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "description" text, "user_id" integer NOT NULL, "status" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atasks_on_user_id" ON "atasks" ("user_id") /*application='TaskTracker'*/[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "atasks" ("id","title","description","user_id","status","created_at","updated_at")
+                     SELECT "id","title","description","user_id","status","created_at","updated_at" FROM "tasks" /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "tasks" /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "description" text, "user_id" integer NOT NULL, "status" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_4d2a9e4d7e"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+) /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_tasks_on_user_id" ON "tasks" ("user_id") /*application='TaskTracker'*/[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "tasks" ("id","title","description","user_id","status","created_at","updated_at")
+                     SELECT "id","title","description","user_id","status","created_at","updated_at" FROM "atasks" /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atasks" /*application='TaskTracker'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0 /*application='TaskTracker'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1 /*application='TaskTracker'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY) /*application='TaskTracker'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20241211185503) /*application='TaskTracker'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20241211185153),
+(20241211183729),
+(20241211183611),
+(20241211180215),
+(20241211180203),
+(20241211180147); /*application='TaskTracker'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='TaskTracker'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TaskTracker'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-12-12 12:55:59.439474', '2024-12-12 12:55:59.439477') RETURNING "key" /*application='TaskTracker'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TaskTracker'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.1ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = 'test', "updated_at" = '2024-12-12 12:55:59.441055' WHERE "ar_internal_metadata"."key" = 'environment' /*application='TaskTracker'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TaskTracker'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '4d6a82b63602200ab09b0041607fd99cb021a532', '2024-12-12 12:55:59.442230', '2024-12-12 12:55:59.442231') RETURNING "key" /*application='TaskTracker'*/[0m
