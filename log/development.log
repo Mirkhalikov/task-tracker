@@ -13156,3 +13156,66 @@ Processing by TasksController#index as HTML
 Completed 200 OK in 62ms (Views: 34.6ms | ActiveRecord: 2.7ms (22 queries, 11 cached) | GC: 6.6ms)
 
 
+  [1m[35m (106.7ms)[0m  [1m[35mCREATE DATABASE "devel_tms" ENCODING = 'unicode' /*application='TaskTracker'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='TaskTracker'*/[0m
+  [1m[35m (340.4ms)[0m  [1m[35mCREATE DATABASE "devel_tms" ENCODING = 'unicode' /*application='TaskTracker'*/[0m
+  [1m[35m (12.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_attachments" CASCADE /*application='TaskTracker'*/[0m
+  [1m[35m (135.2ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" bigserial primary key, "name" character varying NOT NULL, "record_type" character varying NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL) /*application='TaskTracker'*/[0m
+  [1m[35m (64.9ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id") /*application='TaskTracker'*/[0m
+  [1m[35m (65.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id") /*application='TaskTracker'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_blobs" CASCADE /*application='TaskTracker'*/[0m
+  [1m[35m (96.2ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" bigserial primary key, "key" character varying NOT NULL, "filename" character varying NOT NULL, "content_type" character varying, "metadata" text, "service_name" character varying NOT NULL, "byte_size" bigint NOT NULL, "checksum" character varying, "created_at" timestamp(6) NOT NULL) /*application='TaskTracker'*/[0m
+  [1m[35m (65.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_blobs_on_key" ON "active_storage_blobs" ("key") /*application='TaskTracker'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_variant_records" CASCADE /*application='TaskTracker'*/[0m
+  [1m[35m (104.9ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" bigserial primary key, "blob_id" bigint NOT NULL, "variation_digest" character varying NOT NULL) /*application='TaskTracker'*/[0m
+  [1m[35m (56.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest") /*application='TaskTracker'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "categories" CASCADE /*application='TaskTracker'*/[0m
+  [1m[35m (121.7ms)[0m  [1m[35mCREATE TABLE "categories" ("id" bigserial primary key, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TaskTracker'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "categories_tasks" CASCADE /*application='TaskTracker'*/[0m
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE TABLE "categories_tasks" ("task_id" integer, "category_id" integer) /*application='TaskTracker'*/[0m
+  [1m[35m (57.2ms)[0m  [1m[35mCREATE INDEX "index_categories_tasks_on_category_id" ON "categories_tasks" ("category_id") /*application='TaskTracker'*/[0m
+  [1m[35m (64.3ms)[0m  [1m[35mCREATE INDEX "index_categories_tasks_on_task_id" ON "categories_tasks" ("task_id") /*application='TaskTracker'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "tasks" CASCADE /*application='TaskTracker'*/[0m
+  [1m[35m (112.6ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" bigserial primary key, "title" character varying, "description" text, "user_id" integer NOT NULL, "status" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TaskTracker'*/[0m
+  [1m[35m (64.5ms)[0m  [1m[35mCREATE INDEX "index_tasks_on_user_id" ON "tasks" ("user_id") /*application='TaskTracker'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE /*application='TaskTracker'*/[0m
+  [1m[35m (120.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "username" character varying, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "avatar" character varying) /*application='TaskTracker'*/[0m
+  [1m[35m (6.6ms)[0m  [1m[35mALTER TABLE "active_storage_attachments" ADD CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+ /*application='TaskTracker'*/[0m
+  [1m[35m (5.7ms)[0m  [1m[35mALTER TABLE "active_storage_variant_records" ADD CONSTRAINT "fk_rails_993965df05"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+ /*application='TaskTracker'*/[0m
+  [1m[35m (6.7ms)[0m  [1m[35mALTER TABLE "tasks" ADD CONSTRAINT "fk_rails_4d2a9e4d7e"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+ /*application='TaskTracker'*/[0m
+  [1m[35m (88.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='TaskTracker'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TaskTracker'*/[0m
+  [1m[35m (9.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20241211185503) /*application='TaskTracker'*/[0m
+  [1m[35m (7.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20241211185153),
+(20241211183729),
+(20241211183611),
+(20241211180215),
+(20241211180203),
+(20241211180147); /*application='TaskTracker'*/[0m
+  [1m[35m (99.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TaskTracker'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TaskTracker'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (3.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-12-12 20:47:57.297743', '2024-12-12 20:47:57.297749') RETURNING "key" /*application='TaskTracker'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TaskTracker'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TaskTracker'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (10.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '4d6a82b63602200ab09b0041607fd99cb021a532', '2024-12-12 20:47:57.308168', '2024-12-12 20:47:57.308173') RETURNING "key" /*application='TaskTracker'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1551305806679719125) /*application='TaskTracker'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TaskTracker'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TaskTracker'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(1551305806679719125) /*application='TaskTracker'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TaskTracker'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='TaskTracker'*/[0m
+  [1m[35m (27.1ms)[0m  [1m[35mCREATE DATABASE "devel_tms" ENCODING = 'unicode' /*application='TaskTracker'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='TaskTracker'*/[0m
+  [1m[35m (18.6ms)[0m  [1m[35mCREATE DATABASE "devel_tms" ENCODING = 'unicode' /*application='TaskTracker'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='TaskTracker'*/[0m
+  [1m[35m (311.2ms)[0m  [1m[35mCREATE DATABASE "devel_tms_test" ENCODING = 'unicode' /*application='TaskTracker'*/[0m
