@@ -8,8 +8,8 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to tasks_path, notice: "Вы успешно вошли в систему."
     else
-      flash.now[:alert] = "Неверное имя пользователя или пароль."
-      render :new
+      flash[:alert] = "Неверное имя пользователя или пароль"
+      redirect_to login_path
     end
   end
 

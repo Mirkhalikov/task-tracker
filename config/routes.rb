@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post "/signup", to: "users#create"
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
-  delete "/logout", to: "sessions#destroy"
+  get "/logout", to: "sessions#destroy"
 
   resources :users do
     member do
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     member do
       get :edit
       patch :update
-      delete :destroy
+      delete :delete
     end
   end
 
