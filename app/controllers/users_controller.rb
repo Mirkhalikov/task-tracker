@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :check_root, only: [:edit, :update]
+  before_action :check_root, only: [ :edit, :update ]
 
   def index
     @users = User.all

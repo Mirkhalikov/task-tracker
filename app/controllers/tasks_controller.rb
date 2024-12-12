@@ -1,13 +1,12 @@
 class TasksController < ApplicationController
   before_action :authenticate_user
-  before_action :check_root, only: [:edit, :update, :delete]
+  before_action :check_root, only: [ :edit, :update, :delete ]
 
   def index
     @tasks = Task.all
   end
 
   def show
-
   end
 
   def new
