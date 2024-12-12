@@ -1,0 +1,17 @@
+<div class="container">
+  <header>
+    <h1 class="page-title">Список категорий</h1>
+  </header>
+
+  <%= link_to 'Создать новую категорию', new_category_path, class: 'btn btn-create' %>
+
+  <% if @categories.any? %>
+    <ul class="category-list">
+      <% @categories.each do |category| %>
+        <li><%= category.name %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>Нет категорий...</p>
+  <% end %>
+</div>

@@ -25,6 +25,7 @@
     <nav class="header-nav">
       <ul>
         <li><a href="<%= tasks_path %>">Задачи</a></li>
+        <li><a href="<%= categories_path %>">Категории</a></li> <!-- Новая ссылка для перехода к категориям -->
         <% if current_user %>
           <li>
             <a href="<%= user_path(current_user) %>">

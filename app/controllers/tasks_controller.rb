@@ -7,6 +7,7 @@ class TasksController < ApplicationController
   end
 
   def show
+    @task = Task.find(params[:id])
   end
 
   def new
@@ -19,7 +20,7 @@ class TasksController < ApplicationController
       redirect_to tasks_path, notice: "Задача была создана."
     else
       flash[:alert] = "Что-то пошло не так: ".concat(@task.errors.full_messages.to_sentence)
-      redirect_to tasks_new_path
+      redirect_to new_task_path
     end
   end
 
@@ -44,6 +45,7 @@ class TasksController < ApplicationController
   private
 
   def check_root
+    @task = Task.find(params[:id])
     if @task.user_id != current_user.id
       flash[:alert] = "Недостаточно прав для действия"
       redirect_to tasks_path
