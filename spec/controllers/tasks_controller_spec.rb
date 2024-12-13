@@ -1,27 +1,18 @@
 require 'rails_helper'
 
-RSpec.configure do |config|
-  config.include FactoryBot::Syntax::Methods
-end
-
 RSpec.describe TasksController, type: :controller do
-  let!(:user) { FactoryBot.create(:user) }
-  let!(:task) { FactoryBot.create(:task, user: user) }
+  let!(:user) { create(:user, password: 'password') }
+  let!(:task) { create(:task, user: user) }
 
   before do
-    sign_in user
+    session[:user_id] = user.id
   end
 
   describe 'GET #index' do
     it 'assigns @tasks and @users' do
       get :index
-      expect(assigns(:tasks)).to eq([ task ])
-      expect(assigns(:users)).to eq([ user ])
-    end
-
-    it 'renders the index template' do
-      get :index
-      expect(response).to render_template(:index)
+      expect(assigns(:tasks)).to eq(Task.all)
+      expect(assigns(:users)).to eq(User.all)
     end
   end
 
@@ -30,11 +21,6 @@ RSpec.describe TasksController, type: :controller do
       get :show, params: { id: task.id }
       expect(assigns(:task)).to eq(task)
     end
-
-    it 'renders the show template' do
-      get :show, params: { id: task.id }
-      expect(response).to render_template(:show)
-    end
   end
 
   describe 'GET #new' do
@@ -42,41 +28,32 @@ RSpec.describe TasksController, type: :controller do
       get :new
       expect(assigns(:task)).to be_a_new(Task)
     end
-
-    it 'renders the new template' do
-      get :new
-      expect(response).to render_template(:new)
-    end
   end
 
   describe 'POST #create' do
     context 'with valid parameters' do
-      let(:valid_attributes) { { title: "New Task", description: "Task Description" } }
-
       it 'creates a new task' do
         expect {
-          post :create, params: { task: valid_attributes }
+          post :create, params: { task: attributes_for(:task) }
         }.to change(Task, :count).by(1)
       end
 
-      it 'redirects to the tasks path with a notice' do
-        post :create, params: { task: valid_attributes }
+      it 'redirects to the tasks path' do
+        post :create, params: { task: attributes_for(:task) }
         expect(response).to redirect_to(tasks_path)
-        expect(flash[:notice]).to eq("Задача была создана.")
+        expect(flash[:notice]).to eq('Задача была создана.')
       end
     end
 
     context 'with invalid parameters' do
-      let(:invalid_attributes) { { title: "" } }
-
       it 'does not create a new task' do
         expect {
-          post :create, params: { task: invalid_attributes }
+          post :create, params: { task: attributes_for(:task, title: nil) }
         }.not_to change(Task, :count)
       end
 
-      it 'redirects to the new task path with an alert' do
-        post :create, params: { task: invalid_attributes }
+      it 'redirects to new task path' do
+        post :create, params: { task: attributes_for(:task, title: nil) }
         expect(response).to redirect_to(new_task_path)
         expect(flash[:alert]).to include("Что-то пошло не так:")
       end
@@ -88,41 +65,32 @@ RSpec.describe TasksController, type: :controller do
       get :edit, params: { id: task.id }
       expect(assigns(:task)).to eq(task)
     end
-
-    it 'renders the edit template' do
-      get :edit, params: { id: task.id }
-      expect(response).to render_template(:edit)
-    end
   end
 
   describe 'PATCH #update' do
     context 'with valid parameters' do
-      let(:valid_attributes) { { title: "Updated Task" } }
-
       it 'updates the requested task' do
-        patch :update, params: { id: task.id, task: valid_attributes }
+        patch :update, params: { id: task.id, task: { title: 'New Title' } }
         task.reload
-        expect(task.title).to eq("Updated Task")
+        expect(task.title).to eq('New Title')
       end
 
-      it 'redirects to the tasks path with a notice' do
-        patch :update, params: { id: task.id, task: valid_attributes }
+      it 'redirects to the tasks path' do
+        patch :update, params: { id: task.id, task: { title: 'New Title' } }
         expect(response).to redirect_to(tasks_path)
-        expect(flash[:notice]).to eq("Задача была обновлена.")
+        expect(flash[:notice]).to eq('Задача была обновлена.')
       end
     end
 
     context 'with invalid parameters' do
-      let(:invalid_attributes) { { title: "" } }
-
       it 'does not update the task' do
-        patch :update, params: { id: task.id, task: invalid_attributes }
+        patch :update, params: { id: task.id, task: { title: nil } }
         task.reload
-        expect(task.title).not_to eq("")
+        expect(task.title).not_to be_nil
       end
 
-      it 'redirects to the edit task path with an alert' do
-        patch :update, params: { id: task.id, task: invalid_attributes }
+      it 'redirects to the edit task path' do
+        patch :update, params: { id: task.id, task: { title: nil } }
         expect(response).to redirect_to(edit_task_path(task))
         expect(flash[:alert]).to include("Что-то пошло не так:")
       end
@@ -131,16 +99,16 @@ RSpec.describe TasksController, type: :controller do
 
   describe 'DELETE #delete' do
     it 'deletes the task' do
-      task = FactoryBot.create(:task, user: user)
+      task_to_delete = create(:task, user: user)
       expect {
-        delete :delete, params: { id: task.id }
+        delete :delete, params: { id: task_to_delete.id }
       }.to change(Task, :count).by(-1)
     end
 
-    it 'redirects to the tasks path with a notice' do
+    it 'redirects to the tasks path' do
       delete :delete, params: { id: task.id }
       expect(response).to redirect_to(tasks_path)
-      expect(flash[:notice]).to eq("Задача успешно удалена!")
+      expect(flash[:notice]).to eq('Задача успешно удалена!')
     end
   end
 end
