@@ -5,6 +5,25 @@
 
   <%= link_to 'Создать новую задачу', new_task_path, class: 'btn btn-create' %>
 
+  <div class="filter-form">
+    <%= form_with url: tasks_path, method: :get, local: true do %>
+      <div>
+        <label for="status">Статус:</label>
+        <%= select_tag :status, options_for_select([['Все', ''], ['Бэклог', 'backlog'], ['В процессе', 'in_progress'], ['QA', 'qa'], ['Завершено', 'completed']], params[:status]), include_blank: true %>
+      </div>
+      <div>
+        <label for="category_id">Категория:</label>
+        <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :name, params[:category_id]), include_blank: true %>
+      </div>
+      <div>
+        <label for="assigned_user_id">Исполнитель:</label>
+        <%= select_tag :assigned_user_id, options_from_collection_for_select(@users, :id, :username, params[:assigned_user_id]), include_blank: true %>
+      </div>
+      <%= submit_tag 'Применить', class: 'btn btn-filter' %>
+    <% end %>
+  </div>
+
+
   <% if @tasks.count > 0 %>
     <table class="task-table">
       <thead>
@@ -22,30 +41,16 @@
         <tr>
           <td><%= link_to task.title, task_path(task), class: "task-title" %></td>
           <td><%= link_to @users.find(task.user_id).username, user_path(task.user_id), class: "username-link" %></td>
-          <% if task.status.present? %>
-            <td><%= task.status %></td>
-          <% else %>
-            <td>-</td>
-          <% end %>
-          <% if task.categories.count > 0 %>
-            <td><%= task.categories.map(&:name).join(", ") %></td>
-          <% else %>
-            <td>-</td>
-          <% end %>
-          <td>
-            <% if task.assigned_user.present? %>
-              <%= link_to task.assigned_user.username, user_path(task.assigned_user.id), class: "username-link" %>
-            <% else %>
-              -
-            <% end %>
-          </td>
+          <td><%= task.status.present? ? task.status : '-' %></td>
+          <td><%= task.categories.any? ? task.categories.map(&:name).join(", ") : '-' %></td>
+          <td><%= task.assigned_user.present? ? link_to(task.assigned_user.username, user_path(task.assigned_user.id), class: "username-link") : '-' %></td>
           <% if task.user_id == current_user.id %>
             <td><%= link_to 'Редактировать', edit_task_path(task), class: 'btn btn-edit' %></td>
             <td><%= link_to 'Удалить', delete_task_path(task), method: :delete, data: { confirm: 'Вы уверены, что хотите удалить эту задачу?' }, class: 'btn btn-delete' %></td>
-        <% else %>
+          <% else %>
             <td>Нет доступных действий</td>
           <% end %>
-          </tr>
+        </tr>
       <% end %>
       </tbody>
     </table>

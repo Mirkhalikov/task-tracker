@@ -3,8 +3,20 @@ class TasksController < ApplicationController
   before_action :check_root, only: [ :edit, :update, :delete ]
 
   def index
-    @tasks = Task.all
     @users = User.all
+    @tasks = Task.all
+
+    if params[:status].present?
+      @tasks = @tasks.where(status: params[:status])
+    end
+
+    if params[:assigned_user_id].present?
+      @tasks = @tasks.where(assigned_user_id: params[:assigned_user_id])
+    end
+
+    if params[:category_id].present?
+      @tasks = @tasks.joins(:categories).where(categories: { id: params[:category_id] })
+    end
   end
 
   def show
