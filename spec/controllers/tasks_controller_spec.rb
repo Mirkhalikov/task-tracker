@@ -11,7 +11,7 @@ RSpec.describe TasksController, type: :controller do
   describe 'GET #index' do
     it 'assigns @tasks and @users' do
       get :index
-      expect(assigns(:tasks)).to eq(Task.all)
+      expect(assigns(:tasks)).to match_array(Task.all)
       expect(assigns(:users)).to eq(User.all)
     end
   end
