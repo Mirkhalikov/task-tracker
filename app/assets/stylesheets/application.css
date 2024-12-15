@@ -721,3 +721,42 @@ body {
     display: flex;
     gap: 10px;
 }
+
+.container .pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.container .pagination .page_link {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.container .pagination .current_page {
+    background-color: #0056b3;
+    border: 2px solid #004085;
+}
+
+.container .pagination .page_link:hover {
+    background-color: #0056b3;
+}
+
+.container .pagination .prev_page,
+.container .pagination .next_page {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: white;
+}
+
+.container .pagination .prev_page:hover,
+.container .pagination .next_page:hover {
+    background-color: #218838;
+}
