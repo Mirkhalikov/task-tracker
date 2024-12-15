@@ -17,6 +17,8 @@ class TasksController < ApplicationController
     if params[:category_id].present?
       @tasks = @tasks.joins(:categories).where(categories: { id: params[:category_id] })
     end
+
+    @tasks = @tasks.page(params[:page]).per(6)
   end
 
   def show

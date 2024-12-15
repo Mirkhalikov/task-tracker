@@ -54,6 +54,9 @@
       <% end %>
       </tbody>
     </table>
+
+    <%= paginate @tasks %>
+
   <% else %>
     <div class="task-table">
       <p>Нет ни одной текущей задачи...</p>
