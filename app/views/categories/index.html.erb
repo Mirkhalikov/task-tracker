@@ -8,7 +8,10 @@
   <% if @categories.any? %>
     <ul class="category-list">
       <% @categories.each do |category| %>
-        <li><%= category.name %></li>
+        <li>
+          <%= category.name %>
+          <%= link_to 'Редактировать', edit_category_path(category), class: 'btn btn-edit' %>
+        </li>
       <% end %>
     </ul>
   <% else %>

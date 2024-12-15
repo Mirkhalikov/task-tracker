@@ -16,9 +16,7 @@ Rails.application.routes.draw do
 
   resources :tasks do
     member do
-      get :edit
-      patch :update
-      delete :delete
+      get "delete"
     end
   end
 

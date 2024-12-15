@@ -6,7 +6,7 @@
   <%= form_with(model: @task, local: true, html: { class: "task-form" }) do |form| %>
     <% if @task.errors.any? %>
       <div class="error-message">
-        <h2><%= pluralize(@task.errors.count, "ошибка") %> предотвращает сохранение этой задачи:</h2>
+        <h2><%= pluralize(@task.errors.count, "ошибка") %> предотвращает сохранение:</h2>
         <ul>
           <% @task.errors.full_messages.each do |message| %>
             <li><%= message %></li>
@@ -26,17 +26,26 @@
     </div>
 
     <div class="form-field">
+      <%= form.label :assigned_user_id, "Assigned User", class: "field-label" %>
+      <%= form.select :assigned_user_id, [['Не назначен', nil]] + @users.map { |user| [user.username, user.id] }, { prompt: false }, { class: "field-input" } %>
+    </div>
+
+    <div class="form-field">
       <%= form.label :status, class: "field-label" %>
-      <%= form.select :status, ['Бэклог', 'В фокусе', 'В процессе', 'QA', 'Завершено'], { class: "field-input" } %>
+      <%= form.select :status, [['Бэклог', 'backlog'], ['В фокусе', 'focus'], ['В процессе', 'in_progress'], ['QA', 'qa'], ['Завершено', 'completed']], { prompt: 'Без статуса' }, { class: "field-input" } %>
     </div>
 
     <div class="form-field">
       <%= form.label :categories, class: "field-label" %>
-      <%= form.collection_check_boxes :category_ids, Category.all, :id, :name do |b| %>
-        <div class="category-check">
-          <%= b.check_box %>
-          <%= b.label %>
-        </div>
+      <% if Category.any? %>
+        <%= form.collection_check_boxes :category_ids, Category.all, :id, :name do |b| %>
+          <div class="category-check">
+            <%= b.check_box %>
+            <%= b.label %>
+          </div>
+        <% end %>
+      <% else %>
+        <p>Категорий нет. <%= link_to 'Создайте категорию', new_category_path, target: '_blank' %></p>
       <% end %>
     </div>
 

@@ -15,9 +15,20 @@
     <strong>Категории:</strong>
     <%= @task.categories.pluck(:name).join(', ') %>
   </p>
+  <p>
+    <strong>Исполнитель:</strong>
+    <% if @task.assigned_user.present? %>
+      <%= link_to @task.assigned_user.username, user_path(@task.assigned_user.id), class: "username-link" %>
+    <% else %>
+      <span>-</span>
+    <% end %>
+  </p>
 
   <div class="actions">
-    <%= link_to 'Редактировать задачу', edit_task_path(@task), class: 'btn btn-edit' %>
+    <% if @task.user_id == current_user.id %>
+      <%= link_to 'Редактировать', edit_task_path(@task), class: 'btn btn-edit' %>
+      <%= link_to 'Удалить', task_path(@task), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-delete' %>
+    <% end %>
     <%= link_to "Назад", request.referer && URI(request.referer).path != request.fullpath ? URI(request.referer).path : tasks_path, class: 'btn btn-back' %>
   </div>
 </div>

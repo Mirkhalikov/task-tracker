@@ -29,7 +29,7 @@ class CategoriesController < ApplicationController
       redirect_to categories_path, notice: "Категория была обновлена."
     else
       flash[:alert] = "Что-то пошло не так: #{@category.errors.full_messages.to_sentence}"
-      render :edit
+      redirect_to edit_category_path(@category)
     end
   end
 

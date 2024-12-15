@@ -13,6 +13,12 @@ class TasksController < ApplicationController
 
   def new
     @task = @current_user.tasks.build
+    @users = User.all
+  end
+
+  def delete
+    @task.destroy
+    redirect_to tasks_path, notice: "Задача успешно удалена!"
   end
 
   def create
@@ -27,6 +33,7 @@ class TasksController < ApplicationController
 
   def edit
     @task = @current_user.tasks.find(params[:id])
+    @users = User.all
   end
 
   def update
@@ -36,11 +43,6 @@ class TasksController < ApplicationController
     else
       redirect_to edit_task_path(@task), alert: "Что-то пошло не так: ".concat(@task.errors.full_messages.to_sentence)
     end
-  end
-
-  def delete
-    @task.destroy
-    redirect_to tasks_path, notice: "Задача успешно удалена!"
   end
 
   private
@@ -54,6 +56,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :description, :status, category_ids: [])
+    params.require(:task).permit(:title, :description, :status, :assigned_user_id, category_ids: [])
   end
 end
